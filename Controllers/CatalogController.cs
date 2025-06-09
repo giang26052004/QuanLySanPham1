@@ -73,6 +73,7 @@ namespace QuanLySanPham.Controllers
 
             if(Request.Form.Count == 0)
             {
+                ///////
                 return View(catalog);
             } 
             
