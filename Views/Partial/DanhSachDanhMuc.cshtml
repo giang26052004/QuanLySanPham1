@@ -1,0 +1,69 @@
+﻿@model IEnumerable<QuanLySanPham.Catalog>
+
+@{
+    ViewBag.Title = "DanhSachDanhMuc";
+}
+
+<h2>DanhSachDanhMuc</h2>
+
+
+<table class="table">
+    <tr>
+        <td class="sltCourseText">
+            <h3>Chọn danh mục</h3>
+        </td>
+        <td>
+            <select id="sltDanhMuc" class="sltStyle">
+                <option value="-1">Chọn danh mục </option>
+                    @foreach(var item in Model)
+            {
+                <option value="@item.Id">
+                    @item.CatalogName
+                </option>
+
+            }
+               
+            </select>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <h4> Danh sách sản phẩm</h4>
+    <div id="iddanhsachsanpham_table"></div>
+</div>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#iddanhsachsanpham_selection").fadeOut(0);
+        });
+        var selectedDMId;
+        $("#sltDanhMuc").change(function () {
+            selectedDMId= $("#sltDanhMuc").val().trim();
+            if (selectedDMId== "-1") {
+                $("#iddanhsachsanpham_selection").fadeOut()
+            }
+            else {
+                getSanPhamTable();
+                $("#iddanhsachsanpham_selection").fadeIn();
+            }
+        });
+
+        function getSanPhamTable() {
+            $.ajax({
+                url: "/Partial/DanhSachSanPham",
+                type: 'Get',
+                data: { iddm: selectedDMId },
+                success: function (data) {
+                    $("#iddanhsachsanpham_table").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+    </script>
+    }
+

@@ -1,0 +1,46 @@
+﻿@model List<QuanLySanPham.Models.ProductViewModel>
+@{
+    ViewBag.Title = "Product";
+}
+
+<h2>Product</h2>
+
+<form>
+    <p>
+        Đơn giá min: <input id="Text1" name="txtMin" type="text" />
+        Đơn giá max: <input id="Text2" name="txtMax" type="text" />
+        <button type="submit">Submit</button>
+    </p>
+
+
+</form>
+<p>
+    @Html.ActionLink("Thêm mới", "Create")
+</p>
+@foreach (var item in Model)
+{
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>catalog</th>
+            <th>ProductCode</th>
+            <th>ProductName</th>
+            <th>Unitprice</th>
+        </tr>
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>@item.Catalog.CatalogName</td>
+            <td>@item.Code</td>
+            <td>@item.Name</td>
+            <td>@item.Unitprice</td>
+            <td>@Html.ActionLink("Edit", "Eit", new { id = item.Id })</td>
+            <td>@Html.ActionLink("Chi tiết", "Details", new { id = item.Id })</td>
+            <td>@Html.ActionLink("Xóa", "Delete", new { id = item.Id })</td>
+
+        </tr>
+    </table>
+}
+
+

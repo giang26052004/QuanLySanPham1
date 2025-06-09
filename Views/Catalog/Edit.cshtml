@@ -1,0 +1,77 @@
+﻿@model QuanLySanPham.Catalog
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+<form>
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Catalog</h4>
+        <hr />
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div class="form-group">
+                <span>Mã</span>
+                <div class="col-md-10">
+                    <input type="text" name="CatalogCode" value="@Model.CatalogCode" required />
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <span>Tên</span>
+                <div class="col-md-10">
+                    <input type="text" name="CatalogName" value="@Model.CatalogName" required />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myForm').submit(function (e) {
+            e.preventDefault(); // Ngăn form reload trang
+
+            var formData = {
+                CatalogCode: $('#Code').val();
+                CatalogName: $('#Email').val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("SubmitForm", "Home")',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    $('#result').html(response.message);
+                },
+                error: function () {
+                    $('#result').html("Đã xảy ra lỗi.");
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<QuanLySanPham.Catalog>
+
+@{
+    ViewBag.Title = "PartialCatalog";
+}
+
+<h2>PartialCatalog</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CatalogCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CatalogName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CatalogCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CatalogName)
+        </td>
+        
+    </tr>
+}
+
+</table>
