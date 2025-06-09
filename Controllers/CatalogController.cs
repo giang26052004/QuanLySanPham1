@@ -74,7 +74,7 @@ namespace QuanLySanPham.Controllers
             if(Request.Form.Count == 0)
             {
                 return View(catalog);
-            }
+            } 
             
             string catalogCode = Request.Form["CatalogCode"];
             string catalogName = Request.Form["CatalogName"];
